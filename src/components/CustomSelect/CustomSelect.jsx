@@ -24,7 +24,19 @@ export const CustomSelect = ({ value, onChange, options }) => {
     <div className="custom-select" ref={ref}>
       <div className="select-display" onClick={() => setOpen(!open)}>
         {value}
-        <span className="arrow">{open ? "▲" : "▼"}</span>
+        <svg
+          className={`arrow-icon ${open ? "open" : ""}`}
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
       </div>
 
       {open && (

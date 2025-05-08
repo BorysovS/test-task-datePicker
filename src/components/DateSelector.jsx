@@ -74,70 +74,6 @@ export const DateSelector = () => {
       onSubmit={handleSubmit}
       ref={wrapperRef}
     >
-      <div className="header-buttons">
-        <button
-          type="button"
-          onClick={() => {
-            setStep("from");
-            setShowCalendar(true);
-            setSelectedRange({ from: undefined, to: undefined });
-          }}
-          className={step === "from" ? "active" : ""}
-        >
-          {selectedRange.from
-            ? `Start: ${format(selectedRange.from, "PPP")}`
-            : "Start Date"}
-        </button>
-
-        <button
-          type="button"
-          ref={endDateBtnRef}
-          onClick={() => {
-            if (selectedRange.from) {
-              setStep("to");
-              setShowCalendar(true);
-            }
-          }}
-          className={step === "to" ? "active" : ""}
-        >
-          {selectedRange.to
-            ? `End: ${format(selectedRange.to, "PPP")}`
-            : "End Date"}
-        </button>
-      </div>
-
-      {showCalendar && (
-        <div className="calendar">
-          <DayPicker
-            mode="range"
-            selected={selectedRange}
-            onSelect={handleSelect}
-            numberOfMonths={2}
-            pagedNavigation
-          />
-        </div>
-      )}
-
-      <div className="time-pickers">
-        <div className="field">
-          <label>Start Time (optional)</label>
-          <CustomSelect
-            value={startTime}
-            onChange={setStartTime}
-            options={timeOptions}
-          />
-        </div>
-
-        <div className="field">
-          <label>End Time (optional)</label>
-          <CustomSelect
-            value={endTime}
-            onChange={setEndTime}
-            options={timeOptions}
-          />
-        </div>
-      </div>
-
       <div className="summary">
         <p>
           <strong>Selected range:</strong>
@@ -153,10 +89,76 @@ export const DateSelector = () => {
           {endTime ? `at ${endTime}` : ""}
         </p>
       </div>
+      <div className="date-tiem-wrapper-thumb">
+        <div className="header-buttons-wrapper">
+          <div className="header-buttons">
+            <button
+              type="button"
+              onClick={() => {
+                setStep("from");
+                setShowCalendar(true);
+                setSelectedRange({ from: undefined, to: undefined });
+              }}
+              className={step === "from" ? "active" : ""}
+            >
+              {selectedRange.from
+                ? `Start: ${format(selectedRange.from, "PPP")}`
+                : "Start Date"}
+            </button>
 
-      <button type="submit" className="search-button">
-        Search
-      </button>
+            <button
+              type="button"
+              ref={endDateBtnRef}
+              onClick={() => {
+                if (selectedRange.from) {
+                  setStep("to");
+                  setShowCalendar(true);
+                }
+              }}
+              className={step === "to" ? "active" : ""}
+            >
+              {selectedRange.to
+                ? `End: ${format(selectedRange.to, "PPP")}`
+                : "End Date"}
+            </button>
+          </div>
+
+          {showCalendar && (
+            <div className="calendar">
+              <DayPicker
+                mode="range"
+                selected={selectedRange}
+                onSelect={handleSelect}
+                numberOfMonths={2}
+                pagedNavigation
+              />
+            </div>
+          )}
+        </div>
+        <div className="time-pickers">
+          <div className="field">
+            <label>Start Time (optional)</label>
+            <CustomSelect
+              value={startTime}
+              onChange={setStartTime}
+              options={timeOptions}
+            />
+          </div>
+
+          <div className="field">
+            <label>End Time (optional)</label>
+            <CustomSelect
+              value={endTime}
+              onChange={setEndTime}
+              options={timeOptions}
+            />
+          </div>
+        </div>
+
+        <button type="submit" className="search-button">
+          Search
+        </button>
+      </div>
     </form>
   );
 };
